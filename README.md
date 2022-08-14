@@ -6,13 +6,14 @@ The rows of ```data.csv``` are the instances of your objects. As an example, thi
 
 
 ```Julia
-write_to_me("matching_number")
+write_on_the_wall("data.csv", "matching_number"; use_test_data = true);
+
 ```
 
 will conjecture on the matching number invariant column in the provided ```data.csv``` file. 
 
 ```Julia
-surprise_me()
+random_conjecture("data.csv"; use_test_data = true)
 ```
 
 will conjecture on a randomly chosen invariant column from the provided ```data.csv``` file. 

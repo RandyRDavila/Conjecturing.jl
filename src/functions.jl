@@ -293,9 +293,10 @@ function filter(conjs)
     return conjs
 end
 
-function write_to_me(target::String; 
+function write_to_me(file_name::String, 
+                    target::String; 
                     conj_lims = 1:50, 
-                    file_name = "data.csv",
+                    use_test_data = false,
                     object_type = "connected graph")
     # Read invariant data from csv 
     data = CSV.File(file_name)
@@ -309,19 +310,21 @@ function write_to_me(target::String;
     # Collect invariant names from the DataFrame
     invariants = get_invariants(data)
 
-    # Specific properties of interest to graph theory
-    custum_properties = [
-              ["regular", "not_K_n"],
-              ["cubic", "not_K_n"],
-              ["sub_cubic", "not_K_n"],
-              ["cubic", "claw_free"],
-              ["cubic", "triangle_free"],
-              ["regular", "claw_free"],
-             ]
+    if use_test_data == true
+        # Specific properties of interest to graph theory
+        custum_properties = [
+                ["regular", "not_K_n"],
+                ["cubic", "not_K_n"],
+                ["sub_cubic", "not_K_n"],
+                ["cubic", "claw_free"],
+                ["cubic", "triangle_free"],
+                ["regular", "claw_free"],
+                ]
 
-    # Add optional custom properties
-    for prop in custum_properties
-        push!(properties, prop)
+        # Add optional custom properties
+        for prop in custum_properties
+            push!(properties, prop)
+        end
     end
 
     conjs = make_conjectures(data, [target], invariants, properties, object_type)
@@ -337,7 +340,7 @@ function write_to_me(target::String;
 
 end
 
-function surprise_me(; conj_lims = 1:50, file_name = "data.csv")
+function surprise_me(file_name; use_test_data = false, conj_lims = 1:50 )
     # Read invariant data from csv 
     data = CSV.File(file_name)
 
@@ -350,19 +353,21 @@ function surprise_me(; conj_lims = 1:50, file_name = "data.csv")
     # Collect invariant names from the DataFrame
     invariants = get_invariants(data)
 
-    # Specific properties of interest to graph theory
-    custum_properties = [
-              ["regular", "not_K_n"],
-              ["cubic", "not_K_n"],
-              ["sub_cubic", "not_K_n"],
-              ["cubic", "claw_free"],
-              ["cubic", "triangle_free"],
-              ["regular", "claw_free"],
-             ]
+    if use_test_data == true
+        # Specific properties of interest to graph theory
+        custum_properties = [
+                ["regular", "not_K_n"],
+                ["cubic", "not_K_n"],
+                ["sub_cubic", "not_K_n"],
+                ["cubic", "claw_free"],
+                ["cubic", "triangle_free"],
+                ["regular", "claw_free"],
+                ]
 
-    # Add optional custom properties
-    for prop in custum_properties
-        push!(properties, prop)
+        # Add optional custom properties
+        for prop in custum_properties
+            push!(properties, prop)
+        end
     end
 
     # Find random invariant to conjecture on

@@ -1,6 +1,6 @@
 
-export write_to_me
-export surprise_me
+export write_on_the_wall
+export random_conjecture
 
 
 using DataFrames
@@ -293,7 +293,7 @@ function filter(conjs)
     return conjs
 end
 
-function write_to_me(file_name::String, 
+function write_on_the_wall(file_name::String, 
                     target::String; 
                     conj_lims = 1:50, 
                     use_test_data = false,
@@ -340,7 +340,7 @@ function write_to_me(file_name::String,
 
 end
 
-function surprise_me(file_name; use_test_data = false, conj_lims = 1:50 )
+function random_conjecture(file_name; use_test_data = false, conj_lims = 1:50 )
     # Read invariant data from csv 
     data = CSV.File(file_name)
 

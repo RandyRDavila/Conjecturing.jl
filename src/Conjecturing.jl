@@ -1,6 +1,6 @@
 module Conjecturing
 
-export write_to_me, surprise_me
+export write_on_the_wall, random_conjecture
 include("functions.jl")
 include("conjecture_type.jl")
 

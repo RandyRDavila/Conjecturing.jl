@@ -1,4 +1,3 @@
 using Conjecturing
 
-x = surprise_me("data.csv"; use_test_data = true);
-@show typeof(x)
+write_on_the_wall("data.csv", "matching_number"; use_test_data = true);

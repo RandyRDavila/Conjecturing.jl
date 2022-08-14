@@ -294,12 +294,13 @@ function filter(conjs)
 end
 
 function conjecture(file_name::String, 
-                    target::String; 
+                    target::String;
+                    types::Dict{Symbol, DataType},
                     conj_lims = 1:50, 
                     use_test_data = false,
                     object_type = "connected graph")
     # Read invariant data from csv 
-    data = CSV.File(file_name)
+    data = CSV.File(file_name, types=types)
 
     # Convert data to a DataFrame type 
     data = DataFrames.DataFrame(data)
@@ -332,17 +333,17 @@ function conjecture(file_name::String,
 
     println()
     println("Do these surprise you? 💙💙 \n")
-    for i in conj_lims
-        println("Conjecture $(i). ",  conj_string(conjs[i]))
-        println("touch number = $(conjs[i].touch_number) \n")
+    for (i, c) in enumerate(conjs)
+        println("Conjecture $(i). ",  conj_string(c))
+        println("touch number = $(c.touch_number) \n")
     end
-    return conjs[conj_lims]
+    return conjs
 
 end
 
-function random_conjecture(file_name; object_type = "connected graph", use_test_data = false, conj_lims = 1:50)
+function random_conjecture(file_name; types::Dict{Symbol, DataType}, object_type = "connected graph", use_test_data = false, conj_lims = 1:50)
     # Read invariant data from csv 
-    data = CSV.File(file_name)
+    data = CSV.File(file_name, types=types)
 
     # Convert data to a DataFrame type 
     data = DataFrames.DataFrame(data)
@@ -378,10 +379,10 @@ function random_conjecture(file_name; object_type = "connected graph", use_test_
 
     println()
     println("What do you think about these? 💙💙 \n")
-    for i in conj_lims
-        println("Conjecture $(i). ",  conj_string(conjs[i]))
-        println("touch number = $(conjs[i].touch_number) \n")
+    for (i, c) in enumerate(conjs)
+        println("Conjecture $(i). ",  conj_string(c))
+        println("touch number = $(c.touch_number) \n")
     end
 
-    return conjs[conj_lims]
+    return conjs
 end

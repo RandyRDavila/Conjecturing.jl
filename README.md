@@ -6,7 +6,7 @@ The rows of ```data.csv``` are the instances of your objects. As an example, thi
 
 
 ```Julia
-write_on_the_wall("data.csv", "matching_number"; use_test_data = true);
+conjecture("data.csv", "matching_number"; use_test_data = true);
 
 ```
 

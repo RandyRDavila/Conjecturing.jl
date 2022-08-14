@@ -1,5 +1,5 @@
 
-export write_on_the_wall
+export conjecture
 export random_conjecture
 
 
@@ -293,7 +293,7 @@ function filter(conjs)
     return conjs
 end
 
-function write_on_the_wall(file_name::String, 
+function conjecture(file_name::String, 
                     target::String; 
                     conj_lims = 1:50, 
                     use_test_data = false,

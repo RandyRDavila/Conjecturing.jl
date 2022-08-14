@@ -9,7 +9,7 @@ using CSV
 using JuMP
 using GLPK
 
-include("conjecture_type.jl")
+#include("conjecture_type.jl")
 
 
 """

@@ -340,7 +340,7 @@ function conjecture(file_name::String,
 
 end
 
-function random_conjecture(file_name; use_test_data = false, conj_lims = 1:50 )
+function random_conjecture(file_name; object_type = "connected graph", use_test_data = false, conj_lims = 1:50)
     # Read invariant data from csv 
     data = CSV.File(file_name)
 
@@ -373,7 +373,7 @@ function random_conjecture(file_name; use_test_data = false, conj_lims = 1:50 )
     # Find random invariant to conjecture on
     i = rand(1:length(invariants))
     target = invariants[i]
-    conjs = make_conjectures(data, [target], invariants, properties, "connected_graph")
+    conjs = make_conjectures(data, [target], invariants, properties, object_type)
     conjs = filter(conjs)
 
     println()

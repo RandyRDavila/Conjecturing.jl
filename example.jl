@@ -1,3 +1,6 @@
 using Conjecturing
+using DataFrames
+using CSV
 
-write_on_the_wall("data.csv", "matching_number"; use_test_data = true);
+
+conjecture("matrix_data.csv", "det"; object_type = "matrix", conj_lims = 1:15);

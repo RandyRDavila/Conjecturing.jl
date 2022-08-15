@@ -32,8 +32,11 @@ number_types = Dict(
 )
 
 
+
+
 random_conjecture(
     "numbers.csv";
-    object_type = "integer",
+    object_type = "positive integer",
     types=number_types,
+    #use_test_data = true
 );

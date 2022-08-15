@@ -94,16 +94,12 @@ graph_types = Dict(
 )
 
 
-conjs = conjecture(
-    "graph_data.csv",
-    "matching_number",
-    "connected graph",
-    types = graph_types,
-    use_test_data = true,
+conjs = random_conjecture(
+    "matrix_data.csv",
+    "square matrix",
+    types = matrix_types,
+    print_only = true
 );
 
-for i in 1:50
-    println("Conjecture $(i). $(conj_string(conjs[i])) \n")
-end
 
 

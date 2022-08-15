@@ -294,14 +294,15 @@ function filter(conjs)
 end
 
 function conjecture(file_name::String, 
-                    target::String;
+                    target::String,
+                    object_type;
                     types::Dict{Symbol, DataType},
-                    conj_lims = 1:50, 
-                    use_test_data = false,
-                    object_type = "connected graph")
-    # Read invariant data from csv 
+                    print_only = false, 
+                    use_test_data = false)
+   
+    # Read data from CSV file
     data = CSV.File(file_name, types=types)
-
+    
     # Convert data to a DataFrame type 
     data = DataFrames.DataFrame(data)
 
@@ -331,20 +332,26 @@ function conjecture(file_name::String,
     conjs = make_conjectures(data, [target], invariants, properties, object_type)
     conjs = filter(conjs)
 
-    println()
-    println("Do these surprise you? 💙💙 \n")
-    for (i, c) in enumerate(conjs)
-        println("Conjecture $(i). ",  conj_string(c))
-        println("touch number = $(c.touch_number) \n")
+    if print_only
+        println()
+        for (i, c) in enumerate(conjs)
+            println("Conjecture $(i). ",  conj_string(c))
+            println("touch number = $(c.touch_number) \n")
+        end
+        return nothing
     end
     return conjs
 
 end
 
-function random_conjecture(file_name; types::Dict{Symbol, DataType}, object_type = "connected graph", use_test_data = false, conj_lims = 1:50)
+function random_conjecture(file_name,
+                           object_type; 
+                           types::Dict{Symbol, DataType},
+                           use_test_data = false, 
+                           print_only = false)
     # Read invariant data from csv 
     data = CSV.File(file_name, types=types)
-
+    
     # Convert data to a DataFrame type 
     data = DataFrames.DataFrame(data)
 
@@ -376,12 +383,13 @@ function random_conjecture(file_name; types::Dict{Symbol, DataType}, object_type
     target = invariants[i]
     conjs = make_conjectures(data, [target], invariants, properties, object_type)
     conjs = filter(conjs)
-
-    println()
-    println("What do you think about these? 💙💙 \n")
-    for (i, c) in enumerate(conjs)
-        println("Conjecture $(i). ",  conj_string(c))
-        println("touch number = $(c.touch_number) \n")
+    if print_only
+        println()
+        for (i, c) in enumerate(conjs)
+            println("Conjecture $(i). ",  conj_string(c))
+            println("touch number = $(c.touch_number) \n")
+        end
+        return nothing
     end
 
     return conjs

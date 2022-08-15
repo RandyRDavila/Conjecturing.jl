@@ -2,6 +2,7 @@ using Conjecturing
 using DataFrames
 using CSV
 
+# This dictionary is specific to the columns in matrix_data.csv
 matrix_types = Dict(
     :symmetric => Bool,
     :uppertri => Bool,
@@ -18,6 +19,7 @@ matrix_types = Dict(
     :name => String,
 )
 
+# This dictionary is specific to the columns in integer_data.csv
 number_types = Dict(
     :name => String,
     :prime => Bool,
@@ -31,6 +33,7 @@ number_types = Dict(
     :sqrt => Float64,
 )
 
+# This dictionary is specific to the columns in graph_data.csv
 graph_types = Dict(
     :domination_number => Int,
     :total_domination_number => Int,
@@ -97,7 +100,7 @@ conjs = conjecture(
     "connected graph",
     types = graph_types,
     use_test_data = true,
-)
+);
 
 for i in 1:50
     println("Conjecture $(i). $(conj_string(conjs[i])) \n")

@@ -8,7 +8,7 @@ using DataFramesMeta
 using CSV
 using JuMP
 using GLPK
-
+using FIGlet
 #include("conjecture_type.jl")
 
 
@@ -333,6 +333,11 @@ function conjecture(file_name::String,
     conjs = filter(conjs)
 
     if print_only
+        FIGlet.render("Conjecturing.jl", "slant")
+        println("-----------------------------------------------")
+        println("Version  0.1.0")
+        println("Copyright 2022 Randy Davila and David Amos")
+        println("-----------------------------------------------")
         println()
         for (i, c) in enumerate(conjs)
             println("Conjecture $(i). ",  conj_string(c))
@@ -384,6 +389,11 @@ function random_conjecture(file_name,
     conjs = make_conjectures(data, [target], invariants, properties, object_type)
     conjs = filter(conjs)
     if print_only
+        FIGlet.render("Conjecturing.jl", "slant")
+        println("-----------------------------------------------")
+        println("Version  0.1.0")
+        println("Copyright 2022 Randy Davila and David Amos")
+        println("-----------------------------------------------")
         println()
         for (i, c) in enumerate(conjs)
             println("Conjecture $(i). ",  conj_string(c))

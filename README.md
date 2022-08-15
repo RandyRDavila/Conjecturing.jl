@@ -6,14 +6,25 @@ The rows of ```data.csv``` are the instances of your objects. As an example, thi
 
 
 ```Julia
-conjecture("data.csv", "matching_number"; use_test_data = true);
+conjs = conjecture(
+    "graph_data.csv",
+    "matching_number",
+    "connected graph",
+    types = graph_types,
+    use_test_data = true,
+)
 
 ```
 
-will conjecture on the matching number invariant column in the provided ```data.csv``` file. 
+will conjecture on the matching number invariant column in the provided ```graph_data.csv``` file. 
 
 ```Julia
-random_conjecture("data.csv"; use_test_data = true)
+random_conjs = conjecture(
+    "graph_data.csv",
+    "connected graph",
+    types = graph_types,
+    use_test_data = true,
+)
 ```
 
 will conjecture on a randomly chosen invariant column from the provided ```data.csv``` file. 

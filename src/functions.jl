@@ -298,7 +298,8 @@ function conjecture(file_name::String,
                     object_type;
                     types::Dict{Symbol, DataType},
                     print_only = false, 
-                    use_test_data = false)
+                    use_test_data = false,
+                    conj_lims = nothing)
    
     # Read data from CSV file
     data = CSV.File(file_name, types=types)
@@ -339,11 +340,18 @@ function conjecture(file_name::String,
         println("Copyright 2022 Randy Davila and David Amos")
         println("-----------------------------------------------")
         println()
-        for (i, c) in enumerate(conjs)
-            println("Conjecture $(i). ",  conj_string(c))
-            println("touch number = $(c.touch_number) \n")
+        if conj_lims !== nothing
+            for i in conj_lims
+                println("Conjecture $(i). ",  conj_string(conjs[i]))
+                println("touch number = $(conjs[i].touch_number) \n")
+            end 
+        else    
+            for (i, c) in enumerate(conjs)
+                println("Conjecture $(i). ",  conj_string(c))
+                println("touch number = $(c.touch_number) \n")
+            end
+            return nothing
         end
-        return nothing
     end
     return conjs
 
@@ -353,7 +361,8 @@ function random_conjecture(file_name,
                            object_type; 
                            types::Dict{Symbol, DataType},
                            use_test_data = false, 
-                           print_only = false)
+                           print_only = false,
+                           conj_lims = nothing)
     # Read invariant data from csv 
     data = CSV.File(file_name, types=types)
     
@@ -395,11 +404,18 @@ function random_conjecture(file_name,
         println("Copyright 2022 Randy Davila and David Amos")
         println("-----------------------------------------------")
         println()
-        for (i, c) in enumerate(conjs)
-            println("Conjecture $(i). ",  conj_string(c))
-            println("touch number = $(c.touch_number) \n")
+        if conj_lims !== nothing
+            for i in conj_lims
+                println("Conjecture $(i). ",  conj_string(conjs[i]))
+                println("touch number = $(conjs[i].touch_number) \n")
+            end 
+        else    
+            for (i, c) in enumerate(conjs)
+                println("Conjecture $(i). ",  conj_string(c))
+                println("touch number = $(c.touch_number) \n")
+            end
+            return nothing
         end
-        return nothing
     end
 
     return conjs

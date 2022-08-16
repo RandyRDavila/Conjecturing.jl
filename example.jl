@@ -94,11 +94,13 @@ graph_types = Dict(
 )
 
 
-conjs = random_conjecture(
-    "matrix_data.csv",
-    "square matrix",
-    types = matrix_types,
-    print_only = true
+conjs = conjecture(
+    "graph_data.csv",
+    "matching_number",
+    "connected graph",
+    types = graph_types,
+    print_only = true,
+    conj_lims = 1:50
 );
 
 

@@ -1,0 +1,4 @@
+name,min,max,mean,first,last,next_term,geometric,arithmetic,avg_difference,last_difference_plus_last_term
+1,1,16,8.5,1,16,19,false,true,3.0,19
+2,4,22,13.0,1,22,25,false,true,3.0,25
+3,1,128,31.875,1,128,256,true,false,18.142857142857142,192

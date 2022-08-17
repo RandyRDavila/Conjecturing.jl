@@ -18,8 +18,9 @@ sequence_types = Dict(
 )
 
 
-conjs = random_conjecture(
+conjs = conjecture(
     "sequence_data.csv",
+    "next_term",
     "integer increasing sequence",
     types = sequence_types,
     print_only = true,

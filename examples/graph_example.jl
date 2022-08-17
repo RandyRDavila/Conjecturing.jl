@@ -66,7 +66,7 @@ graph_types = Dict(
 
 
 conjs = conjecture(
-    "graph_data.csv",
+    "examples/graph_data.csv",
     "matching_number",
     "connected graph",
     types = graph_types,

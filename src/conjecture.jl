@@ -1,9 +1,10 @@
-abstract type UpperBound end
-abstract type LowerBound end
+abstract type AbstractConjecture end
+abstract type UpperBound <: AbstractConjecture end
+abstract type LowerBound <: AbstractConjecture end
 
-mutable struct Conjecture{T}
-    target::String
-    other::String
+mutable struct Conjecture{T <: AbstractConjecture}
+    target::Statistic
+    other::Statistic
     hypotheses::Vector{String}
     touch_number::Integer
     objects::Vector{Any}
@@ -16,7 +17,7 @@ function _show(io::IO, c::Conjecture, op::String)
     if length(c.hypotheses) > 0
         s *= " [" * join(c.hypotheses, ", ") * "]"
     end
-    s *= ", then $(c.target)($(c.object_symbol)) $(op) $(c.other)($(c.object_symbol))"
+    s *= ", then $(c.target.name)($(c.object_symbol)) $(op) $(c.other.name)($(c.object_symbol))"
     print(io, s)
 end
 

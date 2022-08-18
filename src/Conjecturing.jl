@@ -1,19 +1,14 @@
 module Conjecturing
 
-    # export conjecture
-    # export random_conjecture
-    # export LinearConjecture
-    # export conj_string
-    # export conj_println
-    # export inequality
-    # export get_expression
+    using GLPK
+    using JuMP
 
-    # include("functions.jl")
-    # include("conjecture_type.jl")
-
+    include("statistic.jl")
     include("conjecture.jl")
+    include("generate.jl")
 
-    export UpperBound, LowerBound
+    export Statistic
+    export AbstractConjecture, UpperBound, LowerBound
     export Conjecture
 
 end

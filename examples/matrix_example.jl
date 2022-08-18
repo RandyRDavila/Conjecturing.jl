@@ -20,7 +20,7 @@ matrix_types = Dict(
 )
 
 conjs = random_conjecture(
-    "examples/matrix_data.csv",
+    "examples/data/matrix_data.csv",
     "square matrix",
     types = matrix_types,
     print_only = true,

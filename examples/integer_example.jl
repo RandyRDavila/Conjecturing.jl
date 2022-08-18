@@ -20,7 +20,7 @@ number_types = Dict(
 
 
 conjs = random_conjecture(
-    "examples/integer_data.csv",
+    "examples/data/integer_data.csv",
     "positive integer",
     types = number_types,
     print_only = true,

@@ -19,7 +19,7 @@ sequence_types = Dict(
 
 
 conjs = conjecture(
-    "examples/sequence_data.csv",
+    "examples/data/sequence_data.csv",
     "next_term",
     "integer increasing sequence",
     types = sequence_types,

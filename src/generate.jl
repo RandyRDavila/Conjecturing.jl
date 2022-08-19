@@ -63,3 +63,21 @@ function find_slope_intercept(
     JuMP.optimize!(model)
     return value(m), value(b)
 end
+
+
+function conjecture(
+    T::Type{<: AbstractConjecture},
+    objects::Vector{Any},
+    object_type::String,
+    target::Statistic,
+    other::Statistic,
+    hypotheses::Vector{String}=Vector{String}();
+    rationalization_tol=0.095,
+)
+    m, b = find_slope_intercept(other.values, target.values, T)
+    mr = rationalize(m; tol=rationalization_tol)
+    br = rationalize(b; tol=rationalization_tol)
+    expression = "$mr*$(other.name) + $br"
+    touch_number = sum(mr*other.values .+ br == target.values)
+    return Conjecture{T}(target, expression, hypotheses, touch_number, objects, object_type)
+end

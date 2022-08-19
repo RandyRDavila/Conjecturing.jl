@@ -4,20 +4,19 @@ abstract type LowerBound <: AbstractConjecture end
 
 mutable struct Conjecture{T <: AbstractConjecture}
     target::Statistic
-    other::Statistic
+    expression::String
     hypotheses::Vector{String}
     touch_number::Integer
     objects::Vector{Any}
     object_type::String
-    object_symbol::String
 end
 
 function _show(io::IO, c::Conjecture, op::String)
-    s = "If $(c.object_symbol) is a $(c.object_type)"
+    s = "$(c.object_type)"
     if length(c.hypotheses) > 0
-        s *= " [" * join(c.hypotheses, ", ") * "]"
+        s *= "(" * join(c.hypotheses, ", ") * ")"
     end
-    s *= ", then $(c.target.name)($(c.object_symbol)) $(op) $(c.other.name)($(c.object_symbol))"
+    s *= " ⟹  $(c.target.name) $(op) $(c.expression)"
     print(io, s)
 end
 

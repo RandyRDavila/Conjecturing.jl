@@ -15,23 +15,21 @@ using Test
 
    @testset "Conjecture" begin
       io = IOBuffer()
-      f = Statistic("f", [1,])
-      g = Statistic("g", [1,])
 
       T = UpperBound
-      c = Conjecture{T}(f, g, [], 0, [], "thing", "X")
+      c = Conjecture{T}(Statistic("f", [1,]), "g", [], 0, [], "thing")
       out = show(io, c)
-      @test String(take!(io)) == "If X is a thing, then f(X) >= g(X)"
+      @test String(take!(io)) == "thing ⟹  f >= g"
 
       T = LowerBound
-      c = Conjecture{T}(f, g, [], 0, [], "thing", "X")
+      c = Conjecture{T}(Statistic("f", [1,]), "g", [], 0, [], "thing")
       out = show(io, c)
-      @test String(take!(io)) == "If X is a thing, then f(X) <= g(X)"
+      @test String(take!(io)) == "thing ⟹  f <= g"
 
       T = UpperBound
-      c = Conjecture{T}(f, g, ["a", "b"], 0, [], "thing", "X")
+      c = Conjecture{T}(Statistic("f", [1,]), "g", ["a", "b"], 0, [], "thing")
       out = show(io, c)
-      @test String(take!(io)) == "If X is a thing [a, b], then f(X) >= g(X)"
+      @test String(take!(io)) == "thing(a, b) ⟹  f >= g"
    end
 
    @testset "Generate" begin
@@ -104,6 +102,16 @@ using Test
       m10, b10 = Conjecturing.find_slope_intercept(X10, y10, T10)
       @test m10 ≈ 1.0
       @test b10 == -1.0
+
+      c = Conjecturing.conjecture(UpperBound, [], "thing", Statistic("f", [1,]), Statistic("g", [1,]))
+      @test typeof(c) == Conjecture{UpperBound}
+      @test c.objects == []
+      @test c.object_type == "thing"
+      @test c.expression == "1//1*g + 0//1"
+      @test c.hypotheses == []
+      @test c.touch_number == 1
+      @test c.target.name == "f"
+      @test c.target.values == [1,]
    end
 
 end

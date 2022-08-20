@@ -1,4 +1,5 @@
 using Conjecturing
+using CSV
 using Test
 
 @testset "Conjecturing" begin
@@ -11,6 +12,27 @@ using Test
       s = Statistic(name, values)
       out = show(io, s)
       @test String(take!(io)) == "Statistic{Int64}(\"$name\", $(repr(values)))"
+   end
+
+   @testset "Data" begin
+      data = """
+      a,b,c
+      0,1,2
+      1,2,3
+      """
+      types = Dict(
+         "a" => Bool,
+         "b" => Int64,
+         "c" => Float64,
+      )
+      csv = CSV.File(IOBuffer(data); types=types)
+      stats = Conjecturing.get_statistics(csv)
+      @test typeof(stats) == Vector{Statistic}
+      @test length(stats) == 2
+      @test stats[1].name == "b"
+      @test stats[1].values == [1, 2]
+      @test stats[2].name == "c"
+      @test stats[2].values == [2, 3]
    end
 
    @testset "Conjecture" begin

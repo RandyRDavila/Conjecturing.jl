@@ -14,6 +14,16 @@ using Test
       @test String(take!(io)) == "Statistic{Int64}(\"$name\", $(repr(values)))"
    end
 
+   @testset "Property" begin
+      io = IOBuffer()
+
+      name = "prop"
+      values = [true, false]
+      p = Property(name, values)
+      out = show(io, p)
+      @test String(take!(io)) == "Property(\"$name\", $(repr(values)))"
+   end
+
    @testset "Data" begin
       data = """
       a,b,c
@@ -33,6 +43,12 @@ using Test
       @test stats[1].values == [1, 2]
       @test stats[2].name == "c"
       @test stats[2].values == [2, 3]
+
+      props = Conjecturing.get_properties(csv)
+      @test typeof(props) == Vector{Property}
+      @test length(props) == 1
+      @test props[1].name == "a"
+      @test props[1].values == [false, true]
    end
 
    @testset "Conjecture" begin

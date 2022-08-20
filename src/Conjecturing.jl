@@ -5,12 +5,15 @@ module Conjecturing
     using JuMP
 
     include("statistic.jl")
+    include("property.jl")
     include("data.jl")
     include("conjecture.jl")
     include("generate.jl")
 
     export Statistic
-    export AbstractConjecture, UpperBound, LowerBound
+    export Property
+    export AbstractConjecture
+    export UpperBound, LowerBound
     export Conjecture
 
 end

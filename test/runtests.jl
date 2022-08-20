@@ -12,6 +12,10 @@ using Test
       s = Statistic(name, values)
       out = show(io, s)
       @test String(take!(io)) == "Statistic{Int64}(\"$name\", $(repr(values)))"
+      @test Statistic{Int64}("a", []) == Statistic{Int64}("a", [])
+      @test Statistic{Int64}("a", []) != Statistic{Float64}("a", [])
+      @test Statistic{Int64}("a", []) != Statistic{Int64}("b", [])
+      @test Statistic{Int64}("a", [1,]) != Statistic{Int64}("a", [2,])
    end
 
    @testset "Property" begin
@@ -38,11 +42,7 @@ using Test
       csv = CSV.File(IOBuffer(data); types=types)
       stats = Conjecturing.get_statistics(csv)
       @test typeof(stats) == Vector{Statistic}
-      @test length(stats) == 2
-      @test stats[1].name == "b"
-      @test stats[1].values == [1, 2]
-      @test stats[2].name == "c"
-      @test stats[2].values == [2, 3]
+      @test stats == [Statistic("b", [1, 2]), Statistic("c", [2.0, 3.0])]
 
       props = Conjecturing.get_properties(csv)
       @test typeof(props) == Vector{Property}

@@ -2,7 +2,7 @@ abstract type AbstractConjecture end
 abstract type UpperBound <: AbstractConjecture end
 abstract type LowerBound <: AbstractConjecture end
 
-mutable struct Conjecture{T <: AbstractConjecture}
+mutable struct Conjecture{T<:AbstractConjecture}
     target::Statistic
     expression::String
     hypotheses::Vector{String}
@@ -20,5 +20,5 @@ function _show(io::IO, c::Conjecture, op::String)
     print(io, s)
 end
 
-Base.show(io::IO, conj::Conjecture{UpperBound}) = _show(io, conj, ">=")
-Base.show(io::IO, conj::Conjecture{LowerBound}) = _show(io, conj, "<=")
+Base.show(io::IO, conj::Conjecture{UpperBound}) = _show(io, conj, "<=")
+Base.show(io::IO, conj::Conjecture{LowerBound}) = _show(io, conj, ">=")

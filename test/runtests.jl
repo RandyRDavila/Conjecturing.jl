@@ -60,17 +60,17 @@ using Test
       T = UpperBound
       c = Conjecture{T}(Statistic("f", [1,]), "g", [], 0, [], "thing")
       out = show(io, c)
-      @test String(take!(io)) == "thing ⟹  f >= g"
+      @test String(take!(io)) == "thing ⟹  f <= g"
 
       T = LowerBound
       c = Conjecture{T}(Statistic("f", [1,]), "g", [], 0, [], "thing")
       out = show(io, c)
-      @test String(take!(io)) == "thing ⟹  f <= g"
+      @test String(take!(io)) == "thing ⟹  f >= g"
 
       T = UpperBound
       c = Conjecture{T}(Statistic("f", [1,]), "g", ["a", "b"], 0, [], "thing")
       out = show(io, c)
-      @test String(take!(io)) == "thing(a, b) ⟹  f >= g"
+      @test String(take!(io)) == "thing(a, b) ⟹  f <= g"
    end
 
    @testset "Generate" begin

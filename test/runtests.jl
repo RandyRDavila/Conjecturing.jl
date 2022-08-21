@@ -26,6 +26,9 @@ using Test
       p = Property(name, values)
       out = show(io, p)
       @test String(take!(io)) == "Property(\"$name\", $(repr(values)))"
+      @test Property("a", []) == Property("a", [])
+      @test Property("a", []) != Property("b", [])
+      @test Property("a", [true,]) != Property("a", [false,])
    end
 
    @testset "Data" begin

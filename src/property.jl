@@ -3,6 +3,10 @@ mutable struct Property
     values::Vector{Bool}
 end
 
+function Base.:(==)(x::Property, y::Property)
+    return x.name == y.name && x.values == y.values
+end
+
 function Base.show(io::IO, p::Property)
     print(io, "Property(\"$(p.name)\", $(p.values))")
 end

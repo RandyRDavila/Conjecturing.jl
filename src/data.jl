@@ -24,3 +24,27 @@ function get_properties(file::CSV.File)
     end
     return props
 end
+
+
+struct Dataset
+    name::String
+    objects::Vector
+    statistics::Vector{Statistic}
+    properties::Vector{Property}
+end
+
+function Base.show(io::IO, d::Dataset)
+    s = "Dataset \"$(d.name)\" ("
+    s *= "$(length(d.objects)) objects, "
+    s *= "$(length(d.statistics)) statistics, "
+    s *= "$(length(d.properties)) properties)"
+    print(io, s)
+end
+
+function dataset_from_csv(name::String, path::String, types::Dict{Symbol,DataType})
+    data = CSV.File(path, types=types)
+    objects = data[:name]
+    statistics = get_statistics(data)
+    properties = get_properties(data)
+    return Dataset(name, objects, statistics, properties)
+end

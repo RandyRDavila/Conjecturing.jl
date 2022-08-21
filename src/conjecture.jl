@@ -20,5 +20,5 @@ function _show(io::IO, c::Conjecture, op::String)
     print(io, s)
 end
 
-Base.show(io::IO, conj::Conjecture{UpperBound}) = _show(io, conj, "<=")
-Base.show(io::IO, conj::Conjecture{LowerBound}) = _show(io, conj, ">=")
+Base.show(io::IO, conj::Conjecture{UpperBound}) = _show(io, conj, "≤")
+Base.show(io::IO, conj::Conjecture{LowerBound}) = _show(io, conj, "≥")

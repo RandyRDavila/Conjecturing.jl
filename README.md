@@ -23,7 +23,7 @@ pkg> add https://github.com/RandyRDavila/Conjecturing.jl
 To make a random conjecture on the graph data provided in this repository, copy and paste the following code into the julia REPL:
 ```julia
 julia> using Conjecturing
-julia>  graph_types = Dict(
+julia> graph_types = Dict(
             :domination_number => Int,
             :total_domination_number => Int,
             :connected_domination_number => Int,

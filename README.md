@@ -170,7 +170,7 @@ julia> conjecture(
 ```
 
 The output of this code should look like the following; note that the conjectures are listed in order of conjecture "strength". The conjectures at the top are considered "stronger" than the ones that follow.
-```bash
+```
    ______              _           __             _                 _ __
   / ____/___  ____    (_)__  _____/ /___  _______(_)___  ____ _    (_) /
  / /   / __ \/ __ \  / / _ \/ ___/ __/ / / / ___/ / __ \/ __ `/   / / /

@@ -1,7 +1,4 @@
 using Conjecturing
-using DataFrames
-using CSV
-
 
 # This dictionary is specific to the columns in graph_data.csv
 graph_types = Dict(
@@ -123,8 +120,7 @@ new_graph_types = Dict(
     :independence_number_squared => Int,
     :residue_squared => Int,
     :residue_equals_independence_number => Bool,
-    :independence_number_equals_independent_domination_number =>Bool
-
+    :independence_number_equals_independent_domination_number =>Bool,
 )
 
 conjs = random_conjecture(
@@ -134,6 +130,3 @@ conjs = random_conjecture(
     print_only = true,
     conj_lims = 1:60
 );
-
-
-

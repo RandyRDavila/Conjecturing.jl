@@ -19,7 +19,7 @@ Find the non-boolean column names in your DataFrame
 
 ### Input
 
-- `data` -- a Julia DataFrame; this dataframe should contain invariants along 
+- `data` -- a Julia DataFrame; this dataframe should contain invariants along
             the columns and one column should be named name.
 
 
@@ -31,7 +31,7 @@ Array of Arrays containing the non-boolean column names in `data`.
 function get_properties(data::DataFrame)
     return [[column] for column in names(data) if typeof(data[:, column]) == Vector{Bool}]
 end
-   
+
 
 
 """
@@ -41,7 +41,7 @@ Find the invariant column names in your DataFrame
 
 ### Input
 
-- `data` -- a Julia DataFrame; this dataframe should contain invariants along 
+- `data` -- a Julia DataFrame; this dataframe should contain invariants along
             the columns and one column should be named name.
 
 
@@ -52,7 +52,7 @@ Array of Strings containing the invariant column names in `data`.
 """
 function get_invariants(data::DataFrame)
     # Call get_properties function here
-    properties = [column for column in names(data) 
+    properties = [column for column in names(data)
                 if typeof(data[:, column]) == Vector{Bool}]
     push!(properties, "name")
     return [column for column in names(data) if column ∉ properties]
@@ -62,14 +62,14 @@ end
 """
         get_data_arrays(data::DataFrame, target::String)
 
-Retrieve the values from the DataFrame under the target column. 
+Retrieve the values from the DataFrame under the target column.
 
 ### Input
 
-- `data` -- a Julia DataFrame; this dataframe should contain invariants along 
+- `data` -- a Julia DataFrame; this dataframe should contain invariants along
             the columns and one column should be named name.
 
-- `target` -- a Julia String; this string is the name of the invariant selected. 
+- `target` -- a Julia String; this string is the name of the invariant selected.
 
 
 ### Output
@@ -102,7 +102,12 @@ function get_data_arrays(data::DataFrame, target::String, other::String, propert
 end
 
 
-function make_base_upper_linear_conjecture(data::DataFrame, target::String, other::String, object_type)
+function make_base_upper_linear_conjecture(
+    data::DataFrame,
+    target::String,
+    other::String,
+    object_type,
+)
     (X, y, objects) = get_base_data_arrays(data, target, other)
 
     model = JuMP.Model(GLPK.Optimizer)
@@ -115,11 +120,11 @@ function make_base_upper_linear_conjecture(data::DataFrame, target::String, othe
     @constraint(model, b <= 1)
     for (x, y) in zip(X, y)
         @constraint(model, x*m + b >= y)
-        @constraint(model, x*m - b >= 1)  
+        @constraint(model, x*m - b >= 1)
     end
 
     JuMP.optimize!(model)
-    
+
     props = [object_type]
     conj = LinearConjecture(target,  other, "≤", 0.0, 0.0, props, 0, objects, object_type)
     conj.m = rationalize(JuMP.value(m), tol = .095)
@@ -134,11 +139,13 @@ end
 
 
 
-function make_upper_linear_conjecture(data::DataFrame, 
-                                      target::String, 
-                                      other::String, 
-                                      props::Vector{String}, 
-                                      object_type::String)
+function make_upper_linear_conjecture(
+    data::DataFrame,
+    target::String,
+    other::String,
+    props::Vector{String},
+    object_type::String,
+)
     (X, y, objects) = get_data_arrays(data, target, other, props)
 
     model = JuMP.Model(GLPK.Optimizer)
@@ -151,11 +158,11 @@ function make_upper_linear_conjecture(data::DataFrame,
     @constraint(model, b <= 1)
     for (x, y) in zip(X, y)
         @constraint(model, x*m + b >= y)
-        @constraint(model, x*m - b >= 1)  
+        @constraint(model, x*m - b >= 1)
     end
 
     JuMP.optimize!(model)
-    
+
     props = [prop for prop in props]
     conj = LinearConjecture(target,  other, "≤", 0.0, 0.0, props, 0, objects, object_type)
     conj.m = rationalize(JuMP.value(m), tol = .095)
@@ -169,10 +176,12 @@ function make_upper_linear_conjecture(data::DataFrame,
 end
 
 
-function make_base_lower_linear_conjecture(data::DataFrame, 
-                                           target::String, 
-                                           other::String, 
-                                           object_type::String)
+function make_base_lower_linear_conjecture(
+    data::DataFrame,
+    target::String,
+    other::String,
+    object_type::String,
+)
     (X, y, objects) = get_base_data_arrays(data, target, other)
 
     model = JuMP.Model(GLPK.Optimizer)
@@ -186,7 +195,7 @@ function make_base_lower_linear_conjecture(data::DataFrame,
     @constraint(model, b >= 0.0)
     for (x, y) in zip(X, y)
         @constraint(model, x*m + b <= y)
-        @constraint(model, x*m - b >= 1)  
+        @constraint(model, x*m - b >= 1)
     end
 
     JuMP.optimize!(model)
@@ -206,11 +215,13 @@ end
 
 
 
-function make_lower_linear_conjecture(data::DataFrame, 
-                                      target::String, 
-                                      other::String, 
-                                      props::Vector{String}, 
-                                      object_type::String)
+function make_lower_linear_conjecture(
+    data::DataFrame,
+    target::String,
+    other::String,
+    props::Vector{String},
+    object_type::String,
+)
     (X, y, objects) = get_data_arrays(data, target, other, props)
 
     model = JuMP.Model(GLPK.Optimizer)
@@ -224,7 +235,7 @@ function make_lower_linear_conjecture(data::DataFrame,
     @constraint(model, b >= 0.0)
     for (x, y) in zip(X, y)
         @constraint(model, x*m + b <= y)
-        @constraint(model, x*m - b >= 1)  
+        @constraint(model, x*m - b >= 1)
     end
 
     JuMP.optimize!(model)
@@ -242,11 +253,13 @@ function make_lower_linear_conjecture(data::DataFrame,
 end
 
 
-function make_conjectures(data::DataFrame, 
-                         targets::Vector{String}, 
-                         invariants::Vector{String}, 
-                         properties::Vector{Vector{String}}, 
-                         object_type::String)
+function make_conjectures(
+    data::DataFrame,
+    targets::Vector{String},
+    invariants::Vector{String},
+    properties::Vector{Vector{String}},
+    object_type::String,
+)
     conjs = []
     for target in targets
         invar = [x for x in invariants if x != target]
@@ -293,18 +306,20 @@ function filter(conjs)
     return conjs
 end
 
-function conjecture(file_name::String, 
-                    target::String,
-                    object_type;
-                    types::Dict{Symbol, DataType},
-                    print_only = false, 
-                    use_test_data = false,
-                    conj_lims = nothing)
-   
+function conjecture(
+    file_name::String,
+    target::String,
+    object_type;
+    types::Dict{Symbol, DataType},
+    print_only = false,
+    use_test_data = false,
+    conj_lims = nothing,
+)
+
     # Read data from CSV file
     data = CSV.File(file_name, types=types)
-    
-    # Convert data to a DataFrame type 
+
+    # Convert data to a DataFrame type
     data = DataFrames.DataFrame(data)
 
     # Collect property names from the DataFrame
@@ -344,8 +359,8 @@ function conjecture(file_name::String,
             for i in conj_lims
                 println("Conjecture $(i). ",  conj_string(conjs[i]))
                 println("touch number = $(conjs[i].touch_number) \n")
-            end 
-        else    
+            end
+        else
             for (i, c) in enumerate(conjs)
                 println("Conjecture $(i). ",  conj_string(c))
                 println("touch number = $(c.touch_number) \n")
@@ -357,16 +372,18 @@ function conjecture(file_name::String,
 
 end
 
-function random_conjecture(file_name,
-                           object_type; 
-                           types::Dict{Symbol, DataType},
-                           use_test_data = false, 
-                           print_only = false,
-                           conj_lims = nothing)
-    # Read invariant data from csv 
+function random_conjecture(
+    file_name,
+    object_type;
+    types::Dict{Symbol, DataType},
+    use_test_data = false,
+    print_only = false,
+    conj_lims = nothing,
+)
+    # Read invariant data from csv
     data = CSV.File(file_name, types=types)
-    
-    # Convert data to a DataFrame type 
+
+    # Convert data to a DataFrame type
     data = DataFrames.DataFrame(data)
 
     # Collect property names from the DataFrame
@@ -384,7 +401,7 @@ function random_conjecture(file_name,
                 ["cubic", "claw_free"],
                 ["cubic", "triangle_free"],
                 ["regular", "claw_free"],
-                ]
+            ]
 
         # Add optional custom properties
         for prop in custum_properties
@@ -408,8 +425,8 @@ function random_conjecture(file_name,
             for i in conj_lims
                 println("Conjecture $(i). ",  conj_string(conjs[i]))
                 println("touch number = $(conjs[i].touch_number) \n")
-            end 
-        else    
+            end
+        else
             for (i, c) in enumerate(conjs)
                 println("Conjecture $(i). ",  conj_string(c))
                 println("touch number = $(c.touch_number) \n")

@@ -20,6 +20,205 @@ pkg> add https://github.com/RandyRDavila/Conjecturing.jl
 ```
 
 ## Quick Start Example: Conjecturing on Graphs
+To make graph conjectures on our remote database is really easy! Open the Julia REPL and run:
+
+```julia
+julia> using Conjecturing
+
+julia> make_graph_conjectures("independence_number");
+   ______              _           __             _                 _ __
+  / ____/___  ____    (_)__  _____/ /___  _______(_)___  ____ _    (_) /
+ / /   / __ \/ __ \  / / _ \/ ___/ __/ / / / ___/ / __ \/ __ `/   / / /
+/ /___/ /_/ / / / / / /  __/ /__/ /_/ /_/ / /  / / / / / /_/ /   / / /
+\____/\____/_/ /_/_/ /\___/\___/\__/\__,_/_/  /_/_/ /_/\__, (_)_/ /_/
+                /___/                                 /____/ /___/
+
+-----------------------------------------------
+Version  0.1.0
+Copyright 2022 Randy Davila and David Amos
+-----------------------------------------------
+
+Conjecture 1. If X is a connected graph, then independence_number(X) ≥ residue(X).
+touch number = 90
+
+Conjecture 2. If X is a connected graph and is residue_equals_independence_number, then independence_number(X) ≤ residue(X).
+touch number = 90
+
+Conjecture 3. If X is a connected graph and is regular, then independence_number(X) ≥ 1//5*independence_number_squared(X).
+touch number = 77
+
+Conjecture 4. If X is a connected graph and is a_tree, then independence_number(X) ≥ total_forcing_number(X).
+touch number = 66
+
+Conjecture 5. If X is a connected graph, then independence_number(X) ≥ number_of_degree_one_nodes(X).
+touch number = 49
+
+Conjecture 6. If X is a connected graph and is a_tree, then independence_number(X) ≥ number_of_min_degree_nodes(X).
+touch number = 49
+
+Conjecture 7. If X is a connected graph and is triangle_free, then independence_number(X) ≥ max_degree(X).
+touch number = 38
+
+Conjecture 8. If X is a connected graph, then independence_number(X) ≥ independent_domination_number(X).
+touch number = 37
+
+Conjecture 9. If X is a connected graph and is independence_number_equals_independent_domination_number, then independence_number(X) ≤ independent_domination_number(X).
+touch number = 37
+
+Conjecture 10. If X is a connected graph and is not_K_n, then independence_number(X) ≥ 2//1*two_power_domination_number(X).
+touch number = 36
+
+Conjecture 11. If X is a connected graph, and is sub_cubic, and not_K_n, then independence_number(X) ≥ min_maximal_matching_number.
+touch number = 35
+
+Conjecture 12. If X is a connected graph, then independence_number(X) ≥ domination_number(X).
+touch number = 34
+
+Conjecture 13. If X is a connected graph, then independence_number(X) ≥ radius(X).
+touch number = 33
+
+Conjecture 14. If X is a connected graph and is bipartite, then independence_number(X) ≥ 1//2*order(X).
+touch number = 33
+
+Conjecture 15. If X is a connected graph and is bipartite, then independence_number(X) ≥ matching_number(X).
+touch number = 33
+
+Conjecture 16. If X is a connected graph and is bipartite, then independence_number(X) ≥ vertex_cover_number(X).
+touch number = 33
+
+Conjecture 17. If X is a connected graph, and is cubic, and not_K_n, then independence_number(X) ≥ sub_total_domination_number.
+touch number = 32
+
+Conjecture 18. If X is a connected graph and is semieulerian, then independence_number(X) ≥ sub_total_domination_number(X).
+touch number = 29
+
+Conjecture 19. If X is a connected graph and is has_bridges, then independence_number(X) ≥ sub_total_domination_number(X).
+touch number = 26
+
+Conjecture 20. If X is a connected graph, then independence_number(X) ≥ slater(X).
+touch number = 22
+
+Conjecture 21. If X is a connected graph and is bipartite, then independence_number(X) ≥ sub_total_domination_number(X).
+touch number = 21
+
+Conjecture 22. If X is a connected graph and is claw_free, then independence_number(X) ≤ 3//2*domination_number(X) + 1//2.
+touch number = 17
+
+Conjecture 23. If X is a connected graph and is claw_free, then independence_number(X) ≤ 3//2*independent_domination_number(X) + 1//2.
+touch number = 17
+
+Conjecture 24. If X is a connected graph and is not_K_n, then independence_number(X) ≥ 1//2*chromatic_number(X).
+touch number = 17
+
+Conjecture 25. If X is a connected graph and is claw_free, then independence_number(X) ≤ 3//2*slater(X) + 1//2.
+touch number = 17
+
+Conjecture 26. If X is a connected graph and is claw_free, then independence_number(X) ≤ 3//2*connected_domination_number(X) + 1//2.
+touch number = 16
+
+Conjecture 27. If X is a connected graph and is claw_free, then independence_number(X) ≤ 3//2*radius(X) + 1//2.
+touch number = 16
+
+Conjecture 28. If X is a connected graph and is planar, then independence_number(X) ≥ 1//3*order(X).
+touch number = 16
+
+Conjecture 29. If X is a connected graph and is not_K_n, then independence_number(X) ≥ 1//3*order(X).
+touch number = 16
+
+Conjecture 30. If X is a connected graph and is semieulerian, then independence_number(X) ≥ 2//1*k_slater_index(X).
+touch number = 16
+
+Conjecture 31. If X is a connected graph and is semieulerian, then independence_number(X) ≥ 2//1*power_domination_number(X).
+touch number = 16
+
+Conjecture 32. If X is a connected graph, and is sub_cubic, and not_K_n, then independence_number(X) ≥ 2//3*two_domination_number(X).
+touch number = 16
+
+Conjecture 33. If X is a connected graph and is sub_cubic, then independence_number(X) ≥ 1//6*independence_number_squared(X).
+touch number = 16
+
+Conjecture 34. If X is a connected graph, and is regular, and claw_free, then independence_number(X) ≥ diameter.
+touch number = 15
+
+Conjecture 35. If X is a connected graph, then independence_number(X) ≥ 1//3*triameter(X).
+touch number = 13
+
+Conjecture 36. If X is a connected graph and is has_bridges, then independence_number(X) ≥ 2//1*power_domination_number(X).
+touch number = 13
+
+Conjecture 37. If X is a connected graph and is semieulerian, then independence_number(X) ≤ 1//2*order(X) + 1//2.
+touch number = 12
+
+Conjecture 38. If X is a connected graph and is not_K_n, then independence_number(X) ≥ 1//2*clique_number(X).
+touch number = 12
+
+Conjecture 39. If X is a connected graph, and is sub_cubic, and not_K_n, then independence_number(X) ≥ 2//3*annihilation_number(X).
+touch number = 12
+
+Conjecture 40. If X is a connected graph and is bipartite, then independence_number(X) ≥ 1//2*number_of_min_degree_nodes(X).
+touch number = 12
+
+Conjecture 41. If X is a connected graph and is bipartite, then independence_number(X) ≥ 1//2*number_of_max_degree_nodes(X).
+touch number = 12
+
+Conjecture 42. If X is a connected graph and is triangle_free, then independence_number(X) ≥ min_maximal_matching_number(X).
+touch number = 11
+
+Conjecture 43. If X is a connected graph and is planar, then independence_number(X) ≥ 1//3*number_of_min_degree_nodes(X).
+touch number = 11
+
+Conjecture 44. If X is a connected graph and is not_K_n, then independence_number(X) ≥ 1//3*number_of_min_degree_nodes(X).
+touch number = 11
+
+Conjecture 45. If X is a connected graph and is planar, then independence_number(X) ≥ 1//3*number_of_max_degree_nodes(X).
+touch number = 11
+
+Conjecture 46. If X is a connected graph and is not_K_n, then independence_number(X) ≥ 1//3*number_of_max_degree_nodes(X).
+touch number = 11
+
+Conjecture 47. If X is a connected graph and is two_edge_connected, then independence_number(X) ≥ 1//6*independence_number_squared(X).
+touch number = 11
+
+Conjecture 48. If X is a connected graph and is not_K_n, then independence_number(X) ≥ 1//2*zero_forcing_number(X).
+touch number = 10
+
+Conjecture 49. If X is a connected graph and is not_K_n, then independence_number(X) ≥ 1//2*total_forcing_number(X).
+touch number = 10
+
+Conjecture 50. If X is a connected graph, and is regular, and claw_free, then independence_number(X) ≤ connected_domination_number.
+touch number = 9
+
+Conjecture 51. If X is a connected graph and is eulerian, then independence_number(X) ≥ diameter(X).
+touch number = 9
+
+Conjecture 52. If X is a connected graph and is claw_free, then independence_number(X) ≤ 1//2*order(X) + 1//2.
+touch number = 9
+
+Conjecture 53. If X is a connected graph and is sub_cubic, then independence_number(X) ≥ 1//3*order(X).
+touch number = 9
+
+Conjecture 54. If X is a connected graph, and is sub_cubic, and not_K_n, then independence_number(X) ≥ 2//3*matching_number(X).
+touch number = 9
+
+Conjecture 55. If X is a connected graph and is not_K_n, then independence_number(X) ≥ 2//3*min_maximal_matching_number(X).
+touch number = 9
+
+Conjecture 56. If X is a connected graph, then independence_number(X) ≥ 1//2*annihilation_number(X).
+touch number = 9
+
+Conjecture 57. If X is a connected graph, and is sub_cubic, and not_K_n, then independence_number(X) ≥ 1//2*vertex_cover_number(X).
+touch number = 9
+
+Conjecture 58. If X is a connected graph, then independence_number(X) ≥ 2//3*two_residue(X).
+touch number = 9
+
+Conjecture 59. If X is a connected graph and is sub_cubic, then independence_number(X) ≥ 1//3*number_of_min_degree_nodes(X).
+touch number = 9
+
+Conjecture 60. If X is a connected graph and is sub_cubic, then independence_number(X) ≥ 1//3*number_of_max_degree_nodes(X).
+touch number = 9
+```
+
 To make a random conjecture on the graph data provided in this repository, copy and paste the following code into the julia REPL:
 ```julia
 julia> using Conjecturing

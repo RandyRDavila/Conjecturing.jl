@@ -123,8 +123,9 @@ new_graph_types = Dict(
     :independence_number_equals_independent_domination_number =>Bool,
 )
 
-conjs = random_conjecture(
+conjs = conjecture(
     "examples/data/new_graph_data.csv",
+    "zero_forcing_number",
     "connected graph",
     types = new_graph_types,
     print_only = true,
